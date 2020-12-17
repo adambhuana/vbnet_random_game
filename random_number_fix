@@ -1,0 +1,466 @@
+Public Class Form21
+    Public xyall() As Integer = {6, 19, 110, 19, 214, 19, 6, 109, 110, 109, 214, 109, 6, 199, 110, 199, 214, 199}
+    Public xall() As Integer = {6, 110, 214}
+    Public yall() As Integer = {19, 109, 199}
+    Public noe As Integer = 0
+    Public exi As Integer = 0
+    Public cekt As Integer = 0
+    Public cekb As Integer = 0
+    Public cekr As Integer = 0
+    Public cekl As Integer = 0
+    Public cekno As Integer = 0
+    Public cekall As Integer() = New Integer() {0, 0}
+    Public xr, yr As Integer
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        cek_existbutton(1)
+        cek_posisi1()
+    End Sub
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        cek_existbutton(3)
+        cek_posisi1()
+    End Sub
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        cek_existbutton(4)
+        cek_posisi1()
+    End Sub
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        cek_existbutton(5)
+        cek_posisi1()
+    End Sub
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        cek_existbutton(6)
+        cek_posisi1()
+        'MsgBox("tst")
+    End Sub
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        cek_existbutton(7)
+        cek_posisi1()
+        'ceknomor(8)
+    End Sub
+    Sub ceknomor(v As Integer)
+        MsgBox(v)
+    End Sub
+    Sub cek_existbutton(a As Integer)
+        Dim buttons As Button() = New Button() {Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9}
+        Dim l, c, d, e As Integer
+        cekt = 0
+        cekr = 0
+        cekl = 0
+        cekb = 0
+        cekno = 0
+        c = 0
+        d = 0
+        e = 0
+        l = buttons.Length - 1
+        'MsgBox("cek Eksis")
+        For i = 0 To l
+            If buttons(i).Text <> "" And i <> a Then
+                'cek vertikal
+                If buttons(i).Location.Y < buttons(a).Location.Y And buttons(i).Location.X = buttons(a).Location.X Then
+                    'MsgBox(buttons(i).Location.Y.ToString)
+                Else
+                    If buttons(i).Location.Y > buttons(a).Location.Y And buttons(i).Location.X = buttons(a).Location.X Then
+                        'MsgBox(buttons(i).Location.Y.ToString)
+                        'cek horizontal
+                    Else
+                        If buttons(i).Location.X > buttons(a).Location.X And buttons(i).Location.Y = buttons(a).Location.Y Then
+                            'MsgBox(buttons(i).Location.Y.ToString)
+
+                        Else
+                            If buttons(i).Location.X < buttons(a).Location.X And buttons(i).Location.Y = buttons(a).Location.Y Then
+                                'MsgBox(buttons(i).Location.Y.ToString)
+                            End If
+                        End If
+                    End If
+                End If
+            Else
+                If buttons(i).Location.Y < buttons(a).Location.Y And buttons(i).Location.X = buttons(a).Location.X Then
+                    'MsgBox("Y:" + buttons(i).Location.Y.ToString)
+                    For t = 0 To 2
+                        If buttons(i).Location.Y = yall(t) Then
+                            c = t
+                            'MsgBox("Urutan:" + c.ToString)
+                        End If
+                        If buttons(a).Location.Y = yall(t) Then
+                            d = t
+                            'MsgBox("Klik:" + d.ToString)
+                        End If
+                    Next
+                    e = d - c
+                    If e = 1 Then
+                        movebutton(i, a)
+                    Else
+                        MsgBox("Could Not Move")
+                    End If
+                Else
+                    If buttons(i).Location.Y > buttons(a).Location.Y And buttons(i).Location.X = buttons(a).Location.X Then
+                        For t = 0 To 2
+                            If buttons(i).Location.Y = yall(t) Then
+                                c = t
+                                ' MsgBox("Urutan:" + c.ToString)
+                            End If
+                            If buttons(a).Location.Y = yall(t) Then
+                                d = t
+                                'MsgBox("Klik:" + d.ToString)
+                            End If
+                        Next
+                        e = c - d
+                        If e = 1 Then
+                            movebutton(i, a)
+                        Else
+                            MsgBox("Could Not Move")
+                        End If
+                    Else
+                        If buttons(i).Location.X > buttons(a).Location.X And buttons(i).Location.Y = buttons(a).Location.Y Then
+                            For t = 0 To 2
+                                If buttons(i).Location.X = xall(t) Then
+                                    c = t
+                                    '  MsgBox("Urutan:" + c.ToString)
+                                End If
+                                If buttons(a).Location.X = xall(t) Then
+                                    d = t
+                                    ' MsgBox("Klik:" + d.ToString)
+                                End If
+                            Next
+                            e = c - d
+                            If e = 1 Then
+                                movebutton(i, a)
+                            Else
+                                MsgBox("Could Not Move")
+                            End If
+                        Else
+                            If buttons(i).Location.X < buttons(a).Location.X And buttons(i).Location.Y = buttons(a).Location.Y Then
+                                For t = 0 To 2
+                                    If buttons(i).Location.X = xall(t) Then
+                                        c = t
+                                        'MsgBox("Urutan:" + c.ToString)
+                                    End If
+                                    If buttons(a).Location.X = xall(t) Then
+                                        d = t
+                                        'MsgBox("Klik:" + d.ToString)
+                                    End If
+                                Next
+                                e = d - c
+                                If e = 1 Then
+                                    movebutton(i, a)
+                                Else
+                                    MsgBox("Could Not Move")
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        Next
+        'If noe = 1 Then
+        'cek_noexistbutton(a)
+        'Else
+        'MsgBox("Could not Move")
+        'End If
+    End Sub
+
+    Sub movebutton(num As Integer, num1 As Integer)
+        Dim buttons As Button() = New Button() {Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9}
+        Dim x0, y0, x1, y1 As Integer
+        'cek posisi awal button
+        x0 = buttons(num).Location.X
+        y0 = buttons(num).Location.Y
+        x1 = buttons(num1).Location.X
+        y1 = buttons(num1).Location.Y
+        buttons(num1).Location = New Point(x0, y0)
+        buttons(num).Location = New Point(x1, y1)
+    End Sub
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        cek_existbutton(2)
+        cek_posisi1()
+    End Sub
+
+    Public cekempty1, cekempty2, cekempty3, cekempty4, pojok1, pojok2, pojok3, pojok4 As Boolean
+
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        Button11.Enabled = False
+        Button10.Enabled = True
+        Dim buttons As Button() = New Button() {Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9}
+        For x = 0 To 7
+            buttons(x).Location = New Point(0, 0)
+            buttons(x).Visible = False
+        Next
+        GroupBox1.Enabled = False
+        PictureBox1.Visible = False
+    End Sub
+
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
+
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        Dim buttons As Button() = New Button() {Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9}
+        For x = 0 To 8
+            buttons(x).Location = New Point(0, 0)
+            buttons(x).Visible = False
+        Next
+        GroupBox1.Enabled = True
+        random_button()
+        visible_all()
+        PictureBox1.Visible = True
+        Button10.Enabled = False
+        Button11.Enabled = True
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        cek_existbutton(0)
+        cek_posisi1()
+    End Sub
+
+    Private Sub Form21_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Button1.Location = New Point(x1, y1)
+        'Button2.Location = New Point(x2, y2)
+        'Button3.Location = New Point(x3, y3)
+        'Button4.Location = New Point(x4, y4)
+        GroupBox1.Enabled = False
+        Button1.Visible = False
+        Button2.Visible = False
+        Button3.Visible = False
+        Button4.Visible = False
+        Button5.Visible = False
+        Button6.Visible = False
+        Button7.Visible = False
+        Button8.Visible = False
+        Button10.Enabled = True
+        Button11.Enabled = False
+        PictureBox1.Visible = False
+    End Sub
+    Sub random_button()
+        Dim buttons As Button() = New Button() {Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9}
+        Dim i, temp1, tempo, sama, tsama, y As Integer
+        sama = 0
+        tsama = 0
+        Dim coba As Integer() = New Integer() {0, 0, 0, 0, 0, 0, 0, 0, 0}
+        tempo = 0
+        temp1 = 0
+        y = 0
+        Dim ran As New Random()
+        i = ran.Next(1, 10)
+        For x = 0 To 8
+            sama = 1
+            tsama = 0
+            If x = 0 Then
+                'MsgBox("Button:" + buttons(x).Text)
+                coba(x) = i
+                acak(x, i)
+                'MsgBox("Button " + buttons(x).Text + ": NIlai(i)=" + coba(x).ToString)
+            Else
+                'MsgBox("Button:" + buttons(x).Text)
+                tempo = i
+                While sama <> 0
+                    i = ran.Next(1, 10)
+                    y = 0
+                    While y < x
+                        If i <> coba(y) Then
+                            sama = 0
+                        Else
+                            sama = 1
+                            Exit While
+                        End If
+                        y += 1
+                    End While
+                End While
+                If sama = 0 Then
+                    coba(x) = i
+                    'MsgBox("Button " + buttons(x).Text + ": Nilai (i)=" + coba(x).ToString)
+                    acak(x, i)
+                End If
+            End If
+        Next
+        cek_posisi()
+    End Sub
+    Sub cek_posisi()
+        Dim buttons As Button() = New Button() {Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9}
+        Dim sama As Integer
+        Dim xpos, ypos, m, n, q, q1, o As Integer
+        m = 0
+        n = 0
+        o = 0
+        xpos = 0
+        ypos = 0
+        sama = 0
+        For x = 0 To 8
+            If x = 0 Then
+                xpos = xyall(x)
+                ypos = xyall(x + 1)
+                'MsgBox("X:" + xpos.ToString)
+                'MsgBox("Y:" + ypos.ToString)
+            Else
+                If x = 1 Then
+                    m = 1
+                    n = 2
+                Else
+                    If x = 2 Then
+                        m = 1
+                        While m < x
+                            m = m + 1
+                        End While
+                        n = 2
+                        While n < x
+                            n = n + 1
+                        End While
+                    Else
+                        m = 0
+                        While m < x
+                            m = m + 1
+                        End While
+                        n = 1
+                        While n <= x
+                            n = n + 1
+                        End While
+                        'MsgBox("Nilai N:" + n.ToString)
+                    End If
+                End If
+                q1 = xyall(x + n)
+                xpos = xyall(x + m)
+                ypos = q1
+            End If
+            If buttons(x).Location.X = xpos And buttons(x).Location.Y = ypos Then
+                sama += 1
+                'MsgBox("sama")
+                'MsgBox("BUtton:" + buttons(x).Text + "=Sama" + "Nilai Sama:" + sama.ToString)
+            End If
+        Next
+        'MsgBox("Nilai Sama:" + sama.ToString)
+        'Label2.Text = "Nilai Sama:" + sama.ToString
+        If sama = 8 Then
+            'MsgBox("Sama Semuanya")
+            random_button()
+        End If
+    End Sub
+    Sub cek_posisi1()
+        Dim buttons As Button() = New Button() {Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9}
+        Dim sama As Integer
+        Dim xpos, ypos, m, n, q, q1, o As Integer
+        m = 0
+        n = 0
+        o = 0
+        xpos = 0
+        ypos = 0
+        sama = 0
+        For x = 0 To 8
+            If x = 0 Then
+                xpos = xyall(x)
+                ypos = xyall(x + 1)
+                'MsgBox("X:" + xpos.ToString)
+                'MsgBox("Y:" + ypos.ToString)
+            Else
+                If x = 1 Then
+                    m = 1
+                    n = 2
+                Else
+                    If x = 2 Then
+                        m = 1
+                        While m < x
+                            m = m + 1
+                        End While
+                        n = 2
+                        While n < x
+                            n = n + 1
+                        End While
+                    Else
+                        m = 0
+                        While m < x
+                            m = m + 1
+                        End While
+                        n = 1
+                        While n <= x
+                            n = n + 1
+                        End While
+                        'MsgBox("Nilai N:" + n.ToString)
+                    End If
+                End If
+                q1 = xyall(x + n)
+                xpos = xyall(x + m)
+                ypos = q1
+            End If
+            If buttons(x).Location.X = xpos And buttons(x).Location.Y = ypos Then
+                sama += 1
+                'MsgBox("sama")
+                'MsgBox("BUtton:" + buttons(x).Text + "=Sama" + "Nilai Sama:" + sama.ToString)
+            End If
+        Next
+        'MsgBox("Nilai Sama:" + sama.ToString)
+        'Label2.Text = "Nilai Sama:" + sama.ToString
+        If sama = 8 Then
+            'MsgBox("Sama Semuanya")
+            MsgBox("Selamat Anda Berhasil")
+            Button10.Enabled = True
+            Button11.Enabled = False
+            For x = 0 To 8
+                buttons(x).Location = New Point(0, 0)
+                buttons(x).Visible = False
+            Next
+            PictureBox1.Visible = False
+        End If
+    End Sub
+    Sub acak(p As Integer, q As Integer)
+        'MsgBox("Nilai q: " + q.ToString)
+        Dim buttons As Button() = New Button() {Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9}
+        Dim q1, xpos, ypos, m, n, o As Integer
+        xpos = 0
+        ypos = 0
+        o = 0
+        If q = 1 Then
+            q1 = q - 1
+            xpos = q1
+            ypos = q
+        Else
+            If q = 2 Then
+                m = 0
+                n = 1
+            Else
+                If q = 3 Then
+                    m = 0
+                    o = q - 2
+                    While m < o
+                        m = m + 1
+                    End While
+                    'MsgBox("Nilai M:" + m.ToString)
+                    n = 1
+                    o = q - 1
+                    While n < o
+                        n = n + 1
+                    End While
+                    'MsgBox("Nilai N:" + n.ToString)
+                Else
+                    m = 2
+                    o = q - 2
+                    While m < o
+                        m = m + 1
+                    End While
+                    'MsgBox("Nilai M:" + m.ToString)
+                    n = 2
+                    o = q - 1
+                    While n < o
+                        n = n + 1
+                    End While
+                    'MsgBox("Nilai N:" + n.ToString)
+                End If
+
+
+            End If
+            q1 = q + n
+            xpos = q + m
+            ypos = q1
+            'MsgBox("Nilai x:" + xpos.ToString)
+            'MsgBox("Nilai y:" + ypos.ToString)
+        End If
+        ' MsgBox("Nilai Acak:" + q.ToString)
+        'MsgBox("Koordinat Button:" + buttons(p).Text + "= " + xyall(xpos).ToString + " , " + xyall(ypos).ToString)
+        'MsgBox(buttons(p).Text)
+        buttons(p).Location = New Point(xyall(xpos), xyall(ypos))
+    End Sub
+    Sub visible_all()
+        Dim buttons As Button() = New Button() {Button1, Button2, Button3, Button4, Button5, Button6, Button7, Button8, Button9}
+        For x = 0 To 7
+            buttons(x).Visible = True
+        Next
+
+    End Sub
+End Class
